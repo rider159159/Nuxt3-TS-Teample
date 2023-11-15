@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { $gsap } = useNuxtApp()
 
 onMounted(() => {

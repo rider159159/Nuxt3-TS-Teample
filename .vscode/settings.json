@@ -1,6 +1,8 @@
 {
+  // 是否開啟靜態驗證
   "eslint.experimental.useFlatConfig": true,
   "editor.codeActionsOnSave": {
+    // 若要關閉自動修正功能，以下設定 value 改為 false，並刪除 source.organizeImports
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },

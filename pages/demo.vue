@@ -3,6 +3,8 @@ import { scrollToError } from '@/utils/scroll'
 import { checkObjKey } from '@/utils/common'
 import { getDogImage } from '@/api/module/dog'
 
+const { $dayjs, $swal } = useNuxtApp()
+
 // onMounted(async () => {
 //   await test()
 // })
@@ -48,6 +50,25 @@ function setUserInfo() {
   userInfo.value.USER_INFO_REF.age = 30
   userInfo.value.USER_INFO_REF.gender = 'Man'
 }
+
+function removeUserInfo() {
+  userInfo.value.USER_INFO_REF.name = ''
+  userInfo.value.USER_INFO_REF.age = null
+  userInfo.value.USER_INFO_REF.gender = ''
+}
+
+function openSwal() {
+  $swal.fire({
+    title: 'Hello World',
+    timer: 3000,
+    toast: true,
+    position: 'top-end',
+    timerProgressBar: true,
+    icon: 'success',
+    showConfirmButton: false,
+
+  })
+}
 </script>
 
 <template>
@@ -81,14 +102,17 @@ function setUserInfo() {
       <h3 class="mt-6 text-2xl font-bold">
         彈窗 + Veevalidate 驗證
       </h3>
-      <button type="button" class="my-4" @click="modalStatus = true">
+      <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" @click="modalStatus = true">
         開啟彈窗
       </button>
       <h3 class="mt-6 text-2xl font-bold">
         Store 以及持久化
       </h3>
-      <button type="button" @click="setUserInfo">
+      <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-4" @click="setUserInfo">
         獲得會員資料
+      </button>
+      <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded" @click="removeUserInfo">
+        清除會員資料
       </button>
     </div>
 
@@ -177,5 +201,17 @@ function setUserInfo() {
         </button>
       </VForm>
     </CommonModal>
+
+    <h2 class="mt-6 text-2xl font-bold">
+      Day JS 轉換
+    </h2>
+    {{ $dayjs().format('YYYY-MM-DD') }}
+
+    <h2 class="mt-6 text-2xl font-bold">
+      SweetAlert 使用
+    </h2>
+    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" @click="openSwal">
+      開啟 Sweet Alert
+    </button>
   </section>
 </template>

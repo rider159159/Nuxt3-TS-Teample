@@ -1,7 +1,5 @@
 <script setup>
 import { feature, mesh } from 'topojson-client'
-
-import * as d3 from 'd3'
 import worldData from '../assets/us.json'
 
 const map = ref()
@@ -61,14 +59,14 @@ function clicked(event, d) {
   const [[x0, y0], [x1, y1]] = path.bounds(d)
   event.stopPropagation()
   states.transition().style('fill', null)
-  d3.select(this).transition().style('fill', 'red')
+  $d3.select(this).transition().style('fill', 'red')
   svg.transition().duration(750).call(
     zoom.transform,
-    d3.zoomIdentity
+    $d3.zoomIdentity
       .translate(width / 2, height / 2)
       .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
       .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
-    d3.pointer(event, svg.node()),
+    $d3.pointer(event, svg.node()),
   )
 }
 
