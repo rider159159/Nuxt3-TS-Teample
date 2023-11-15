@@ -1,17 +1,25 @@
 import { defineStore } from 'pinia'
 
+interface ReQuestItem {
+  id: string
+  cancel: any
+}
+interface LoadingItem {
+  id: string
+}
+
 // request pending 中的 API 的狀態
 export const requestStore = defineStore('request-store', () => {
   // 是否顯示 Loading 特效
-  const LOADING_ARRAY = ref([])
+  const LOADING_ARRAY = ref<LoadingItem[]>([])
   const IS_PENDING = ref(false)
-  const REQUEST_ARRAY = ref([])
+  const REQUEST_ARRAY = ref<ReQuestItem[]>([])
 
-  const ADD_LOADING_ARRAY = (loadingToken) => {
+  const ADD_LOADING_ARRAY = (loadingToken: LoadingItem) => {
     LOADING_ARRAY.value.push(loadingToken)
   }
 
-  const REMOVE_TARGET_LOADING_ARRAY = (id) => {
+  const REMOVE_TARGET_LOADING_ARRAY = (id: string) => {
     const loadingIndex = LOADING_ARRAY.value.findIndex(item => item.id === id)
     if (loadingIndex > -1)
       LOADING_ARRAY.value.splice(loadingIndex, 1)
@@ -21,7 +29,7 @@ export const requestStore = defineStore('request-store', () => {
     LOADING_ARRAY.value = []
   }
 
-  const ADD_REQUEST_ARRAY = (loadingToken) => {
+  const ADD_REQUEST_ARRAY = (loadingToken: ReQuestItem) => {
     REQUEST_ARRAY.value.push(loadingToken)
   }
 
